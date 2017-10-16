@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
-#include "SeekBehaviour.generated.h"
+#include "BTTaskSeek.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class WATERPOLOAI_API USeekBehaviour : public UBTTaskNode
+class WATERPOLOAI_API UBTTaskSeek : public UBTTaskNode
 {
 	GENERATED_BODY()
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
