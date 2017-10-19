@@ -30,7 +30,7 @@ void AFieldPlayer::Tick(float DeltaTime)
 
 	FVector dir = Velocity;
 	dir.Normalize();
-	SetActorRotation(UKismetMathLibrary::MakeRotFromYZ(dir, FVector(0,0,1)));
+	SetActorRotation(UKismetMathLibrary::MakeRotFromXZ(dir, FVector(0,0,1)));
 }
 
 // Called to bind functionality to input
