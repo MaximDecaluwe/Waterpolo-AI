@@ -2,8 +2,8 @@
 
 #pragma once
 
+#include "GameFramework/DefaultPawn.h"
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
 #include "FieldPlayer.generated.h"
 
 UENUM(BlueprintType)
@@ -32,19 +32,13 @@ enum class EPositionsEnum : uint8
 	VE_CB UMETA(DisplayName = "Centre back")
 };
 
-UCLASS()
-class WATERPOLOAI_API AFieldPlayer : public APawn
+UCLASS(abstract)
+class WATERPOLOAI_API AFieldPlayer : public ADefaultPawn
 {
 	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere)
-		UStaticMeshComponent* PlayerMesh;
 public:
 	// Sets default values for this pawn's properties
 	AFieldPlayer();
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FVector Velocity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float SwimSpeed;
@@ -53,21 +47,25 @@ public:
 		ETeamEnum Team;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool HasBall;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		EPositionsEnum Position;
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Steering")
+		void ApplySteeringForce(const FVector2D& Force);
+	virtual void ApplySteeringForce_Implementation(const FVector2D& Force);
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Steering")
+		void UpdateTransform();
+	virtual void UpdateTransform_Implementation();
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Steering")
+		FVector2D GetEstimatedFuturePosition(float DeltaSeconds, float Offset, const FVector2D& GoalPos);
+	virtual FVector2D GetEstimatedFuturePosition_Implementation(float DeltaSeconds, float Offset, const FVector2D& GoalPos);
 
-	
-	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Steering")
+		FVector2D Seek(const FVector2D& Target);
+	virtual FVector2D Seek_Implementation(const FVector2D& Target);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Steering")
+		FVector2D Pursue(AFieldPlayer* fieldPlayer, float Offset, const FVector2D& GoalPos);
+	virtual FVector2D Pursue_Implementation(AFieldPlayer* fieldPlayer, float Offset, const FVector2D& GoalPos);
 };
