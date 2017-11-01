@@ -29,7 +29,8 @@ enum class EPositionsEnum : uint8
 	VE_RW UMETA(DisplayName = "Right wing"),
 	VE_LB UMETA(DisplayName = "Left back"),
 	VE_RB UMETA(DisplayName = "Right Back"),
-	VE_CB UMETA(DisplayName = "Centre back")
+	VE_CB UMETA(DisplayName = "Centre back"),
+	VE_GK UMETA(DisplayName = "Goalkeeper")
 };
 
 UCLASS(abstract)
