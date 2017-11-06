@@ -41,8 +41,26 @@ public:
 	// Sets default values for this pawn's properties
 	AFieldPlayer();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.5", UIMax = "1.0"))
 		float SwimSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.5", UIMax = "1.0"))
+		float SprintSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.5", UIMax = "1.0"))
+		float AccelerationRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.5", UIMax = "1.0"))
+		float BallHandling;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.5", UIMax = "1.0"))
+		float ShotAccuracy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.5", UIMax = "1.0"))
+		float ShotPower;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.5", UIMax = "1.0"))
+		float Aggression;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ETeamEnum Team;
